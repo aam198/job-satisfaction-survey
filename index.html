@@ -4,8 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Satisfaction Survey</title>
+  <link href="styles/jobSurvey.css" rel="stylesheet">
 </head>
 <body>
+  <h3>Job Satisfaction Survey</h3>
+
+  <h2>Please select the one number that comes closest to reflecting your opinion</h2>
+
+  <form>
+
+    <fieldset class="scale-labels">
+      <legend>Scale:</legend>
+      <div class="scale">
+        <label>1<br>Disagree very much</label>
+        <label>2<br>Disagree moderately</label>
+        <label>3<br>Disagree slightly</label>
+        <label>4<br>Agree slightly</label>
+        <label>5<br>Agree moderately</label>
+        <label>6<br>Agree very much</label>
+      </div>
+    </fieldset>
+
+    <hr>
+
+    <!-- Example question structure, repeat this block for each item -->
+    <div class="question">
+      <div class="question-text">1. I feel I am being paid a fair amount for the work I do.</div>
+      <div class="scale">
+        <label><input type="radio" name="q1" value="1">1</label>
+        <label><input type="radio" name="q1" value="2">2</label>
+        <label><input type="radio" name="q1" value="3">3</label>
+        <label><input type="radio" name="q1" value="4">4</label>
+        <label><input type="radio" name="q1" value="5">5</label>
+        <label><input type="radio" name="q1" value="6">6</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-text">2. There is really too little chance for promotion on my job.</div>
+      <div class="scale">
+        <label><input type="radio" name="q1" value="1">1</label>
+        <label><input type="radio" name="q1" value="2">2</label>
+        <label><input type="radio" name="q1" value="3">3</label>
+        <label><input type="radio" name="q1" value="4">4</label>
+        <label><input type="radio" name="q1" value="5">5</label>
+        <label><input type="radio" name="q1" value="6">6</label>
+      </div>
+    </div>
+
+
+
+    
+
+    <p style="text-align:center;">&copy; 1994 Paul E. Spector. All rights reserved.</p>
+
+    <button type="submit">Submit</button>
+
+  </form>
   
 </body>
 </html>

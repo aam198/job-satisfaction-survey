@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+font-size: 62.5% /* using rem for font, 22px = 2.2rem*/
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arial, sans-serif";
+  line-height: 1.6;
+  height: 100vh;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.question {
+  margin-bottom: 1.5rem;
+  display: flex;
+}
+.scale {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.scale label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.875rem;
+}
+.question-text {
+  font-weight: bold;
+}
+/* fieldset {
+  border: none;
+  padding: 0;
+} */
+legend {
+  font-weight: bold;
+}
