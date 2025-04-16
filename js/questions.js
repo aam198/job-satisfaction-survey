@@ -36,4 +36,3 @@ const questionBank = [
   "My job is enjoyable.",
   "Work assignments are not fully explained."
 ];
- 
