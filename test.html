@@ -107,6 +107,23 @@
       "Work assignments are not fully explained."
     ];
 
+    const negativeItems = [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36];
+
+    const subscales = {
+      Pay: [1, 10, 19, 28],
+      Promotion: [2, 11, 20, 33],
+      Supervision: [3, 12, 21, 30],
+      FringeBenefits: [4, 13, 22, 29],
+      ContingentRewards: [5, 14, 23, 32],
+      OperatingConditions: [6, 15, 24, 31],
+      Coworkers: [7, 16, 25, 34],
+      NatureOfWork: [8, 17, 27, 35],
+      Communication: [9, 18, 26, 36]
+    };
+
+    const responses = new Array(36).fill(null);
+
+
     const questions = questionBank;
     let currentQuestion = 0;
     const container = document.getElementById('question-container');
@@ -133,11 +150,14 @@
         alert('Please select a response before continuing.');
         return;
       }
+
+      responses[currentQuestion] = parseInt(selected.value);
+
       if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         renderQuestion(currentQuestion);
       } else {
-        document.getElementById('survey-form').submit();
+        calculateScores();
       }
     });
 
@@ -150,6 +170,33 @@
 
     // Initialize first question
     renderQuestion(currentQuestion);
+    function calculateScores() {
+      
+    // Apply reverse scoring
+    const scoredResponses = responses.map((resp, index) => {
+      const itemNumber = index + 1;
+      if (resp === null) return null;
+      return negativeItems.includes(itemNumber) ? 7 - resp : resp;
+    });
+
+    // Handle missing data by mean substitution
+    const answered = scoredResponses.filter(x => x !== null);
+    const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
+
+    const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
+
+    // Calculate subscale scores
+    const results = {};
+    for (const [facet, items] of Object.entries(subscales)) {
+      results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
+    }
+
+    // Calculate total score
+    results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
+
+    // Display results
+    alert(JSON.stringify(results, null, 2));
+  }
   </script>
 </body>
 </html>
