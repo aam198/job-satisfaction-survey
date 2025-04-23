@@ -47,6 +47,20 @@
     .hidden {
       display: none;
     }
+    #results {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background-color: #f0f0f0;
+      border-radius: 0.75rem;
+    }
+    #results h2 {
+      margin-bottom: 1rem;
+    }
+    #results-container p {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+
   </style>
 </head>
 <body>
@@ -66,6 +80,12 @@
       <button type="button" id="next-btn">Next</button>
     </div>
   </form>
+
+  <div id="results" class="hidden">
+    <h2>Survey Results</h2>
+    <div id="results-container"></div>
+  </div>
+  
 
   <script>
     const questionBank = [
@@ -171,7 +191,7 @@
     // Initialize first question
     renderQuestion(currentQuestion);
     function calculateScores() {
-      
+
     // Apply reverse scoring
     const scoredResponses = responses.map((resp, index) => {
       const itemNumber = index + 1;
@@ -195,7 +215,18 @@
     results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
 
     // Display results
-    alert(JSON.stringify(results, null, 2));
+    const resultsDiv = document.getElementById('results');
+    const resultsContainer = document.getElementById('results-container');
+
+    resultsContainer.innerHTML = '';
+    for (const [facet, score] of Object.entries(results)) {
+      const p = document.createElement('p');
+      p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
+      resultsContainer.appendChild(p);
+    }
+
+    document.getElementById('survey-form').classList.add('hidden');
+    resultsDiv.classList.remove('hidden');
   }
   </script>
 </body>
