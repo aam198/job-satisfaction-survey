@@ -152,6 +152,7 @@
 
     function renderQuestion(index) {
       const q = questions[index];
+      // Container to show questions 1 at a time.
       container.innerHTML = `
         <div class="question-text"><strong>${index + 1}. ${q}</strong></div>
         <div class="scale">
@@ -160,6 +161,7 @@
           `).join('')}
         </div>
       `;
+      // If question hits the last question.length then change button text to Submit
       nextBtn.textContent = index === questions.length - 1 ? 'Submit' : 'Next';
       prevBtn.disabled = index === 0;
     }
@@ -167,10 +169,11 @@
     nextBtn.addEventListener('click', () => {
       const selected = container.querySelector('input[type="radio"]:checked');
       if (!selected) {
+        // TODO: update alert to styled component?
         alert('Please select a response before continuing.');
         return;
       }
-
+      // Add value for question to responses array 
       responses[currentQuestion] = parseInt(selected.value);
 
       if (currentQuestion < questions.length - 1) {
