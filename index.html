@@ -1,21 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Satisfaction Survey</title>
-  <link href="styles/jobSurvey.css" rel="stylesheet">
-</head>
-<body>
-  <h3>Job Satisfaction Survey</h3>
 
-  <h2>Please select the one number that comes closest to reflecting your opinion</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Satisfaction Survey</title>
+    <link href="./styles/jobSurvey.css" rel="stylesheet">
+    <style>
+      
+      .question {
+        margin-bottom: 2rem;
+      }
 
-  <form>
+      
 
+      .question-text {
+        font-weight: bold;
+      }
+
+      button {
+        margin-top: 2rem;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #results {
+        margin-top: 3rem;
+        padding: 1.5rem;
+        background-color: #f0f0f0;
+        border-radius: 0.75rem;
+      }
+
+      #results h2 {
+        margin-bottom: 1rem;
+      }
+
+      #results-container p {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Job Satisfaction Survey</h1>
+
+    <p>Please select the one number that comes closest to reflecting your opinion</p>
     <fieldset class="scale-labels">
       <legend>Scale:</legend>
-      <div class="scale">
+      <div class="scale-legend">
         <label>1<br>Disagree very much</label>
         <label>2<br>Disagree moderately</label>
         <label>3<br>Disagree slightly</label>
@@ -27,125 +74,167 @@
 
     <hr>
 
-    <!-- Example question structure, repeat this block for each item -->
-    <div class="question">
-      <div class="question-text">1. I feel I am being paid a fair amount for the work I do.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
+    <form id="survey-form">
+      <div id="question-container" class="question">
+        <!-- Question will be injected here -->
       </div>
+      <div class="button-group">
+        <button type="button" id="prev-btn">Prev</button>
+        <button type="button" id="next-btn">Next</button>
+      </div>
+    </form>
+
+    <div id="results" class="hidden">
+      <h2>Survey Results</h2>
+      <div id="results-container"></div>
     </div>
 
-    <div class="question">
-      <div class="question-text">2. There is really too little chance for promotion on my job.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">3. My supervisor is quite competent in doing his/her job.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">4. I am not satisfied with the benefits I receive.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">5. When I do a good job, I receive the recognition for it that I should receive.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">6. Many of our rules and procedures make doing a good job difficult.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">7. I like the people I work with.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">8. I sometimes feel my job is meaningless.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">9. Communications seem good within this organization.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    <div class="question">
-      <div class="question-text">10. Raises are too few and far between.</div>
-      <div class="scale">
-        <label><input type="radio" name="q1" value="1">1</label>
-        <label><input type="radio" name="q1" value="2">2</label>
-        <label><input type="radio" name="q1" value="3">3</label>
-        <label><input type="radio" name="q1" value="4">4</label>
-        <label><input type="radio" name="q1" value="5">5</label>
-        <label><input type="radio" name="q1" value="6">6</label>
-      </div>
-    </div>
-    
 
-    <p style="text-align:center;">&copy; 1994 Paul E. Spector. All rights reserved.</p>
+    <script>
+      const questionBank = [
+        "I feel I am being paid a fair amount for the work I do.",
+        "There is really too little chance for promotion on my job.",
+        "My supervisor is quite competent in doing his/her job.",
+        "I am not satisfied with the benefits I receive.",
+        "When I do a good job, I receive the recognition for it that I should receive.",
+        "Many of our rules and procedures make doing a good job difficult.",
+        "I like the people I work with.",
+        "I sometimes feel my job is meaningless.",
+        "Communications seem good within this organization.",
+        "Raises are too few and far between.",
+        "Those who do well on the job stand a fair chance of being promoted.",
+        "My supervisor is unfair to me.",
+        "The benefits we receive are as good as most other organizations offer.",
+        "I do not feel that the work I do is appreciated.",
+        "My efforts to do a good job are seldom blocked by red tape.",
+        "I find I have to work harder at my job because of the incompetence of people I work with.",
+        "I like doing the things I do at work.",
+        "The goals of this organization are not clear to me.",
+        "I feel unappreciated by the organization when I think about what they pay me.",
+        "People get ahead as fast here as they do in other places.",
+        "My supervisor shows too little interest in the feelings of subordinates.",
+        "The benefit package we have is equitable.",
+        "There are few rewards for those who work here.",
+        "I have too much to do at work.",
+        "I enjoy my coworkers.",
+        "I often feel that I do not know what is going on with the organization.",
+        "I feel a sense of pride in doing my job.",
+        "I feel satisfied with my chances for salary increases.",
+        "There are benefits we do not have which we should have.",
+        "I like my supervisor.",
+        "I have too much paperwork.",
+        "I don't feel my efforts are rewarded the way they should be.",
+        "I am satisfied with my chances for promotion.",
+        "There is too much bickering and fighting at work.",
+        "My job is enjoyable.",
+        "Work assignments are not fully explained."
+      ];
 
-    <button type="submit">Submit</button>
+      const negativeItems = [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36];
 
-  </form>
-  
-</body>
+      const subscales = {
+        Pay: [1, 10, 19, 28],
+        Promotion: [2, 11, 20, 33],
+        Supervision: [3, 12, 21, 30],
+        FringeBenefits: [4, 13, 22, 29],
+        ContingentRewards: [5, 14, 23, 32],
+        OperatingConditions: [6, 15, 24, 31],
+        Coworkers: [7, 16, 25, 34],
+        NatureOfWork: [8, 17, 27, 35],
+        Communication: [9, 18, 26, 36]
+      };
+
+      const responses = new Array(36).fill(null);
+
+
+      const questions = questionBank;
+      let currentQuestion = 0;
+      const container = document.getElementById('question-container');
+      const nextBtn = document.getElementById('next-btn');
+      const prevBtn = document.getElementById('prev-btn');
+
+      function renderQuestion(index) {
+        const q = questions[index];
+        // Container to show questions 1 at a time.
+        container.innerHTML = `
+        <div class="question-text"><strong>${index + 1}. ${q}</strong></div>
+        <div class="scale">
+          ${[1, 2, 3, 4, 5, 6].map(num => `
+            <label><input type="radio" name="q${index + 1}" value="${num}" required>${num}</label>
+          `).join('')}
+        </div>
+      `;
+        // If question hits the last question.length then change button text to Submit
+        nextBtn.textContent = index === questions.length - 1 ? 'Submit' : 'Next';
+        prevBtn.disabled = index === 0;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const selected = container.querySelector('input[type="radio"]:checked');
+        if (!selected) {
+          // TODO: update alert to styled component?
+          alert('Please select a response before continuing.');
+          return;
+        }
+        // Add value for question to responses array 
+        responses[currentQuestion] = parseInt(selected.value);
+
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          renderQuestion(currentQuestion);
+        } else {
+          calculateScores();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          renderQuestion(currentQuestion);
+        }
+      });
+
+      // Initialize first question
+      renderQuestion(currentQuestion);
+      function calculateScores() {
+
+        // Apply reverse scoring
+        const scoredResponses = responses.map((resp, index) => {
+          const itemNumber = index + 1;
+          if (resp === null) return null;
+          return negativeItems.includes(itemNumber) ? 7 - resp : resp;
+        });
+
+        // Handle missing data by mean substitution
+        const answered = scoredResponses.filter(x => x !== null);
+        const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
+
+        const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
+
+        // Calculate subscale scores
+        const results = {};
+        for (const [facet, items] of Object.entries(subscales)) {
+          results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
+        }
+
+        // Calculate total score
+        results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
+
+        // Display results
+        const resultsDiv = document.getElementById('results');
+        const resultsContainer = document.getElementById('results-container');
+
+        resultsContainer.innerHTML = '';
+        for (const [facet, score] of Object.entries(results)) {
+          const p = document.createElement('p');
+          p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
+          resultsContainer.appendChild(p);
+        }
+
+        document.getElementById('survey-form').classList.add('hidden');
+        resultsDiv.classList.remove('hidden');
+      }
+    </script>
+  </body>
+
 </html>

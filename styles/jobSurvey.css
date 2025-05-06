@@ -1,16 +1,6 @@
-* {
-  box-sizing: border-box;
-}
 
-html {
-font-size: 62.5% /* using rem for font, 22px = 2.2rem*/
-}
 
 body{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-family: "Arial, sans-serif";
   line-height: 1.6;
   height: 100vh;
@@ -18,10 +8,33 @@ body{
   padding: 1rem;
 }
 
+h1 {
+  text-align: center;
+}
+
 .question {
   margin-bottom: 1.5rem;
-  display: flex;
 }
+
+.scale-labels{
+  width: 75%;
+  margin: 0 auto;
+}
+
+.scale-legend {
+  display: flex;
+  gap: 0.5rem;
+  /* flex-wrap: wrap; */
+  width: 100%;
+  align-items:center;
+  justify-content: center;
+}
+
+.scale-legend label {
+  text-align:center;
+  font-size: 0.875rem;
+}
+
 .scale {
   display: flex;
   gap: 1rem;
