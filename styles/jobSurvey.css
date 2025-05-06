@@ -17,17 +17,16 @@ h1 {
 }
 
 .scale-labels{
-  width: 75%;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .scale-legend {
   display: flex;
-  gap: 0.5rem;
-  /* flex-wrap: wrap; */
+  gap: 0.8rem;
+  flex-wrap: wrap;
   width: 100%;
-  align-items:center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .scale-legend label {
