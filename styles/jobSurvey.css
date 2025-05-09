@@ -4,17 +4,21 @@ body{
   font-family: "Arial, sans-serif";
   line-height: 1.6;
   height: 100vh;
-  margin: 2rem auto;
   padding: 1rem;
 }
 
-h1 {
-  text-align: center;
+.job-survey-container{
+  width: 80%;
+  margin: 2rem auto;
 }
 
+h4 {
+  text-align: center;
+}
+/* 
 .question {
   margin-bottom: 1.5rem;
-}
+} */
 
 .scale-labels{
   max-width: 900px;
@@ -55,4 +59,36 @@ h1 {
 } */
 legend {
   font-weight: bold;
+}
+
+button.survey-prev, button.survey-next {
+  background-color: #407C96;
+  margin-top: 1.6rem;
+  padding: 0.75rem 2rem;
+  font-size: 100%;
+  font-style: bold;
+  color: #fff;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: 1px solid #cbd5e0;
+  transition: all .2s ease-in;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.06),0 1px 2px 0 rgba(0,0,0,0.06);
+}
+
+button.survey-prev{
+  background-color: #F0F0F2;
+  color: #4e4e4e;
+}
+
+button.survey-prev:hover{
+  background-color: #e1e1e1;
+}
+
+button.survey-btn:hover{
+  background-color: #245b72;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
 }

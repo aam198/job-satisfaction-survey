@@ -7,26 +7,8 @@
     <title>Job Satisfaction Survey</title>
     <link href="./styles/jobSurvey.css" rel="stylesheet">
     <style>
-      
-      .question {
-        margin-bottom: 2rem;
-      }
-
-      
-
       .question-text {
         font-weight: bold;
-      }
-
-      button {
-        margin-top: 2rem;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-        border: none;
-        background-color: #333;
-        color: #fff;
-        border-radius: 0.5rem;
-        cursor: pointer;
       }
 
       .button-group {
@@ -57,36 +39,38 @@
   </head>
 
   <body>
-    <h1>Job Satisfaction Survey</h1>
+    <div class="job-survey-container">
+      <h4>Job Satisfaction Survey</h4>
 
-    <p>Please select the one number that comes closest to reflecting your opinion</p>
-    <fieldset class="scale-labels">
-      <legend>Scale:</legend>
-      <div class="scale-legend">
-        <label>1<br>Disagree very much</label>
-        <label>2<br>Disagree moderately</label>
-        <label>3<br>Disagree slightly</label>
-        <label>4<br>Agree slightly</label>
-        <label>5<br>Agree moderately</label>
-        <label>6<br>Agree very much</label>
+      <p>Please select the one number that comes closest to reflecting your opinion</p>
+      <fieldset class="scale-labels">
+        <legend>Scale:</legend>
+        <div class="scale-legend">
+          <label>1<br>Disagree very much</label>
+          <label>2<br>Disagree moderately</label>
+          <label>3<br>Disagree slightly</label>
+          <label>4<br>Agree slightly</label>
+          <label>5<br>Agree moderately</label>
+          <label>6<br>Agree very much</label>
+        </div>
+      </fieldset>
+
+      <hr>
+
+      <form id="survey-form">
+        <div id="question-container" class="question">
+          <!-- Question will be injected here -->
+        </div>
+        <div class="button-group">
+          <button type="button" class="survey-prev" id="prev-btn">Prev</button>
+          <button type="button" class="survey-next" id="next-btn">Next</button>
+        </div>
+      </form>
+
+      <div id="results" class="hidden">
+        <h2>Survey Results</h2>
+        <div id="results-container"></div>
       </div>
-    </fieldset>
-
-    <hr>
-
-    <form id="survey-form">
-      <div id="question-container" class="question">
-        <!-- Question will be injected here -->
-      </div>
-      <div class="button-group">
-        <button type="button" id="prev-btn">Prev</button>
-        <button type="button" id="next-btn">Next</button>
-      </div>
-    </form>
-
-    <div id="results" class="hidden">
-      <h2>Survey Results</h2>
-      <div id="results-container"></div>
     </div>
 
 
