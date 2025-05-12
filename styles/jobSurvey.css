@@ -76,15 +76,15 @@ button.survey-prev, button.survey-next {
 }
 
 button.survey-prev{
-  background-color: #F0F0F2;
+  background-color: #e1e1e1;
   color: #4e4e4e;
 }
 
 button.survey-prev:hover{
-  background-color: #e1e1e1;
+  background-color: #d0d0d0;
 }
 
-button.survey-btn:hover{
+button.survey-next:hover{
   background-color: #245b72;
 }
 
