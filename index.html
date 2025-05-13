@@ -116,6 +116,7 @@
 
       const negativeItems = [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36];
 
+      // Question related to category for scoring 
       const subscales = {
         Pay: [1, 10, 19, 28],
         Promotion: [2, 11, 20, 33],
@@ -130,13 +131,14 @@
 
       const responses = new Array(36).fill(null);
 
-
+      // Variables
       const questions = questionBank;
       let currentQuestion = 0;
       const container = document.getElementById('question-container');
       const nextBtn = document.getElementById('next-btn');
       const prevBtn = document.getElementById('prev-btn');
 
+      // To show each question and add response to variables
       function renderQuestion(index) {
         const q = questions[index];
         // Container to show questions 1 at a time.
@@ -163,6 +165,7 @@
         // Add value for question to responses array 
         responses[currentQuestion] = parseInt(selected.value);
 
+        // If questions reach the end then run calculateScores()
         if (currentQuestion < questions.length - 1) {
           currentQuestion++;
           renderQuestion(currentQuestion);
@@ -182,7 +185,7 @@
       renderQuestion(currentQuestion);
       function calculateScores() {
 
-        // Apply reverse scoring
+        // Applies the reverse scoring from scoring doc 
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
           if (resp === null) return null;
