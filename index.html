@@ -57,8 +57,9 @@
       </div>
 
       <hr>
-      <h5>Question:</h5>
+      
       <form id="survey-form">
+        <h5>Question:</h5>
         <div id="question-container" class="question">
           <!-- Question will be injected here -->
         </div>
@@ -202,7 +203,7 @@
 
         const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
 
-        // Calculate subscale scores
+        // Calculate subscale scores and listing category followed by result from user selections
         const results = {};
         for (const [facet, items] of Object.entries(subscales)) {
           results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
