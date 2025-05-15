@@ -44,8 +44,8 @@
       <h4>Job Satisfaction Survey</h4>
 
       <p>Please select the one number that comes closest to reflecting your opinion</p>
-      <fieldset class="scale-labels">
-        <legend>Scale:</legend>
+      <div class="scale-labels">
+        <p>Scale:</p>
         <div class="scale-legend">
           <label>1<br>Disagree very much</label>
           <label>2<br>Disagree moderately</label>
@@ -54,7 +54,7 @@
           <label>5<br>Agree moderately</label>
           <label>6<br>Agree very much</label>
         </div>
-      </fieldset>
+      </div>
 
       <hr>
       <h5>Question:</h5>
@@ -142,12 +142,15 @@
       // To show each question and add response to variables
       function renderQuestion(index) {
         const q = questions[index];
+        // To temporarily save response 
+        const savedResponse = responses[index];
+
         // Container to show questions 1 at a time.
         container.innerHTML = `
         <div class="question-text"><strong>${index + 1}. ${q}</strong></div>
-        <div class="scale">
+        <div class="scale" role="radiogroup">
           ${[1, 2, 3, 4, 5, 6].map(num => `
-            <label><input type="radio" name="q${index + 1}" value="${num}" required>${num}</label>
+            <label><input type="radio" name="q${index + 1}" value="${num}" ${savedResponse === num ? 'checked' : ''} required>${num}</label>
           `).join('')}
         </div>
       `;
@@ -184,8 +187,8 @@
 
       // Initialize first question
       renderQuestion(currentQuestion);
-      function calculateScores() {
 
+      function calculateScores() {
         // Applies the reverse scoring from scoring doc 
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
