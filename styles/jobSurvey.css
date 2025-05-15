@@ -10,6 +10,7 @@ body{
 .job-survey-container{
   width: 80%;
   margin: 2rem auto;
+  color:#4e4e4e;
 }
 
 h4 {
@@ -59,6 +60,10 @@ h4 {
 } */
 legend {
   font-weight: bold;
+}
+
+input:checked{
+  accent-color: #2d728f;
 }
 
 button.survey-prev, button.survey-next {

@@ -16,19 +16,20 @@
         justify-content: space-between;
       }
 
-      .hidden {
+      /* .hidden {
         display: none;
-      }
+      } */
 
       #results {
         margin-top: 3rem;
-        padding: 1.5rem;
-        background-color: #f0f0f0;
+        padding: 1rem;
+        background-color: #f9f7f7;
         border-radius: 0.75rem;
+        border: 1px solid #d4d7d9;
       }
 
       #results h2 {
-        margin-bottom: 1rem;
+        margin:0 0 1rem;
       }
 
       #results-container p {
@@ -56,7 +57,7 @@
       </fieldset>
 
       <hr>
-
+      <h5>Question:</h5>
       <form id="survey-form">
         <div id="question-container" class="question">
           <!-- Question will be injected here -->
@@ -68,7 +69,7 @@
       </form>
 
       <div id="results" class="hidden">
-        <h2>Survey Results</h2>
+        <h2>Survey Results:</h2>
         <div id="results-container"></div>
       </div>
     </div>
