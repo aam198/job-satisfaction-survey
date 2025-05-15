@@ -197,7 +197,7 @@
           return negativeItems.includes(itemNumber) ? 7 - resp : resp;
         });
 
-        // Handle missing data by mean substitution
+        // Handle data by mean substitution
         const answered = scoredResponses.filter(x => x !== null);
         const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
 
