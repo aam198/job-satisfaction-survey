@@ -97,3 +97,7 @@ button.survey-next:hover{
   display: flex;
   justify-content: space-between;
 }
+
+.question-block {
+  margin-bottom: 1.5rem;
+}
