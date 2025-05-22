@@ -134,8 +134,12 @@
       const responses = new Array(36).fill(null);
 
       // Variables
+      const questionsPerPage=10;
       const questions = questionBank;
-      let currentQuestion = 0;
+      const totalPages = Math.ceil(questions.length / questionsPerPage);
+
+      let currentPage= 0;
+      // let currentQuestion = 0;
       const container = document.getElementById('question-container');
       const nextBtn = document.getElementById('next-btn');
       const prevBtn = document.getElementById('prev-btn');
