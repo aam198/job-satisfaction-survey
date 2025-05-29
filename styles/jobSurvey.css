@@ -107,6 +107,12 @@ button.survey-next:hover{
   .scale{
     margin-left: 1.6rem;
   }
+
+  .scale-group{
+    display:flex;
+    justify-content: space-between;
+  }
+
   .question-scale {
     display: flex;
     gap: 1.4rem;

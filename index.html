@@ -154,6 +154,10 @@
           questionDiv.classList.add('question-block');
           questionDiv.innerHTML = `
             <div class="question-text">${i + 1}. ${questions[i]}</div>
+            <div class="scale-group">
+              <span>Disagree very much</span>
+              <span>Agree very much</span>
+            </div>
             <div class="scale" role="radiogroup">
               ${[1, 2, 3, 4, 5, 6].map(num => `
                 <label>
