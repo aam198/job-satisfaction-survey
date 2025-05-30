@@ -9,7 +9,19 @@
 
   <body>
     <!-- Beginning of second survey, Job Survey Satisfaction -->
+    
     <style type="text/css">
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
       .job-survey-container {
         max-width: 750px;
         width: 100%;
@@ -157,10 +169,10 @@
       <form id="survey-form">
         <div class="question" id="question-container"><!-- Question will be injected here --></div>
         <div class="button-group">
-          <button class="survey-prev" id="prev-btn" type="button">Prev
+          <button class="survey-prev" id="prev-btn" aria-label="Go to previous survey page" type="button">Prev
           </button>
           <p class="survey-pagination" id="survey-paginate"></p>
-          <button class="survey-next" id="next-btn" type="button">Next
+          <button class="survey-next" id="next-btn" aria-label="Go to next survey page" type="button">Next
           </button>
         </div>
       </form>
@@ -247,7 +259,7 @@
           questionDiv.classList.add('question-block');
           questionDiv.innerHTML = `
             <div class="question-text">${i + 1}. ${questions[i]}</div>
-            <div class="question-scale" role="radiogroup">${[1, 2, 3, 4, 5, 6].map(num => `<label> <input type="radio" name="q${i}" value="${num}" ${savedResponse === num ? 'checked' : ''} required> ${num} </label>`).join('')}
+            <div class="question-scale" role="radiogroup">${[1, 2, 3, 4, 5, 6].map(num => `<label for="q${1}"> <input type="radio" name="q${i}" value="${num}" ${savedResponse === num ? 'checked' : ''} required> ${num} </label>`).join('')}
             </div>`;
           container.appendChild(questionDiv);
         }
