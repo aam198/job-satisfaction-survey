@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- Beginning of second survey, Job Survey Satisfaction -->
+    <style type="text/css">
+      .job-survey-container {
+        max-width: 750px;
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid #cbd5e0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        border-radius: 4px;
+        padding: 2rem;
+        color: #4e4e4e;
+      }
+
+      .scale-legend-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .scale-legend {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-evenly;
+      }
+
+      .scale-legend label {
+        text-align: center;
+        font-weight: normal;
+      }
+
+      .question-scale {
+        margin-left: 1.6rem;
+      }
+
+      .question-scale label {
+        margin-right: 1rem;
+        font-size: 114%;
+      }
+
+      .question-block {
+        margin-bottom: 1.4rem;
+      }
+
+      .question-text {
+        font-weight: bold;
+        font-size: 125%;
+        padding-bottom: 1.2rem;
+      }
+
+      input[type="radio"] {
+        height: 16px;
+        width: 16px;
+      }
+
+      input:checked {
+        accent-color: #2d728f;
+      }
+
+      input:focus,
+      input:focus-visible {
+        outline: 1px solid #2d728f;
+      }
+
+      input:focus:not(:focus-visible) {
+        outline: none;
+        box-shadow: 1px 1px 1px rgba(1, 1, 0, 0.3);
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 4rem;
+      }
+
+      button.survey-prev,
+      button.survey-next {
+        background-color: #407C96;
+        margin-top: 1.6rem;
+        padding: 0.75rem 2rem;
+        font-size: 100%;
+        font-style: bold;
+        color: #fff;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        border: 1px solid #cbd5e0;
+        transition: all .2s ease-in;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      button[disabled=disabled],
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      button.survey-next:hover,
+      button.survey-prev:hover {
+        background-color: #245b72;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #results {
+        margin-top: 3rem;
+        padding: 1.5rem;
+        background-color: #fbfafa;
+        border-radius: 0.75rem;
+        border: 1px solid #d4d7d9;
+      }
+
+      #results h4 {
+        margin-bottom: 1rem;
+      }
+
+      #results-container p {
+        margin: 0.5rem 0;
+      }
+    </style>
+    <h3>Job Satisfaction Survey
+    </h3>
+    <p>Please select the one number that comes closest to reflecting your opinion
+    </p>
+    <div class="job-survey-container">
+      <fieldset class="scale-legend-container">
+        <legend style="border: 0; margin-bottom:0.6rem; font-size: 125%;">Survey Scale:
+        </legend>
+        <div class="scale-legend"><label>1
+            <br />
+            Disagree very much</label> <label>2
+            <br />
+            Disagree moderately</label> <label>3
+            <br />
+            Disagree slightly</label> <label>4
+            <br />
+            Agree slightly</label> <label>5
+            <br />
+            Agree moderately</label> <label>6
+            <br />
+            Agree very much</label>
+        </div>
+      </fieldset>
+      <hr style="width: 55%; margin-top: 10px; margin-bottom: 2.8rem; border: 1px solid #D33D3D;" />
+      <form id="survey-form">
+        <div class="question" id="question-container"><!-- Question will be injected here --></div>
+        <div class="button-group">
+          <button class="survey-prev" id="prev-btn" type="button">Prev
+          </button>
+          <button class="survey-next" id="next-btn" type="button">Next
+          </button>
+        </div>
+      </form>
+      <div class="hidden" id="results">
+        <h4 style="text-align: center; margin-bottom:1.2rem; color:#4e4e4e; ">Survey Results
+        </h4>
+        <div id="results-container">&#160;
+        </div>
+      </div>
+    </div>
+    <script>
+      const questionBank = [
+        "I feel I am being paid a fair amount for the work I do.",
+        "There is really too little chance for promotion on my job.",
+        "My supervisor is quite competent in doing his/her job.",
+        "I am not satisfied with the benefits I receive.",
+        "When I do a good job, I receive the recognition for it that I should receive.",
+        "Many of our rules and procedures make doing a good job difficult.",
+        "I like the people I work with.",
+        "I sometimes feel my job is meaningless.",
+        "Communications seem good within this organization.",
+        "Raises are too few and far between.",
+        "Those who do well on the job stand a fair chance of being promoted.",
+        "My supervisor is unfair to me.",
+        "The benefits we receive are as good as most other organizations offer.",
+        "I do not feel that the work I do is appreciated.",
+        "My efforts to do a good job are seldom blocked by red tape.",
+        "I find I have to work harder at my job because of the incompetence of people I work with.",
+        "I like doing the things I do at work.",
+        "The goals of this organization are not clear to me.",
+        "I feel unappreciated by the organization when I think about what they pay me.",
+        "People get ahead as fast here as they do in other places.",
+        "My supervisor shows too little interest in the feelings of subordinates.",
+        "The benefit package we have is equitable.",
+        "There are few rewards for those who work here.",
+        "I have too much to do at work.",
+        "I enjoy my coworkers.",
+        "I often feel that I do not know what is going on with the organization.",
+        "I feel a sense of pride in doing my job.",
+        "I feel satisfied with my chances for salary increases.",
+        "There are benefits we do not have which we should have.",
+        "I like my supervisor.",
+        "I have too much paperwork.",
+        "I don't feel my efforts are rewarded the way they should be.",
+        "I am satisfied with my chances for promotion.",
+        "There is too much bickering and fighting at work.",
+        "My job is enjoyable.",
+        "Work assignments are not fully explained."
+      ];
+      const negativeItems = [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36];
+      // Question related to category for scoring 
+      const subscales = {
+        Pay: [1, 10, 19, 28],
+        Promotion: [2, 11, 20, 33],
+        Supervision: [3, 12, 21, 30],
+        FringeBenefits: [4, 13, 22, 29],
+        ContingentRewards: [5, 14, 23, 32],
+        OperatingConditions: [6, 15, 24, 31],
+        Coworkers: [7, 16, 25, 34],
+        NatureOfWork: [8, 17, 27, 35],
+        Communication: [9, 18, 26, 36]
+      };
+      // Variables
+      const questionsPerPage = 10;
+      const questions = questionBank;
+      // Breakup the amount of questions for each page
+      const totalPages = Math.ceil(questions.length / questionsPerPage);
+      let currentPage = 0;
+      const responses = new Array(36).fill(null);
+      // let currentQuestion = 0;
+      const container = document.getElementById('question-container');
+      const nextBtn = document.getElementById('next-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      // To show 10 questions and add response to variables
+      function renderQuestionPage(page) {
+        container.innerHTML = '';
+        const start = page * questionsPerPage;
+        const end = Math.min(start + questionsPerPage, questions.length);
+        for (let i = start; i < end; i++) {
+          const savedResponse = responses[i];
+          const questionDiv = document.createElement('div');
+          questionDiv.classList.add('question-block');
+          questionDiv.innerHTML = `
+<div class="question-text">${i + 1}. ${questions[i]}</div>
+<div class="question-scale" role="radiogroup">
+${[1, 2, 3, 4, 5, 6].map(num => `
+<label>
+<input type="radio" name="q${i}" value="${num}" ${savedResponse === num ? 'checked' : ''} required>
+${num}
+  </label>
+`).join('')}
+  </div>
+`;
+          container.appendChild(questionDiv);
+        }
+        prevBtn.disabled = page === 0;
+        nextBtn.textContent = page === totalPages - 1 ? 'Submit' : 'Next';
+      }
+      nextBtn.addEventListener('click', () => {
+        const start = currentPage * questionsPerPage;
+        const end = Math.min(start + questionsPerPage, questions.length);
+        // Save all current responses
+        for (let i = start; i < end; i++) {
+          const selected = container.querySelector(`input[name="q${i}"]:checked`);
+          if (!selected) {
+            alert(`Please answer question ${i + 1} before continuing.`);
+            return;
+          }
+          responses[i] = parseInt(selected.value);
+        }
+        if (currentPage < totalPages - 1) {
+          currentPage++;
+          renderQuestionPage(currentPage);
+        } else {
+          calculateScores();
+        }
+      });
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+          currentPage--;
+          renderQuestionPage(currentPage);
+        }
+      });
+
+      renderQuestionPage(currentPage);
+
+      function calculateScores() {
+        const scoredResponses = responses.map((resp, index) => {
+          const itemNumber = index + 1;
+          if (resp === null) return null;
+          return negativeItems.includes(itemNumber) ? 7 - resp : resp;
+        });
+        const answered = scoredResponses.filter(x => x !== null);
+        const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
+        const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
+        const results = {};
+        for (const [facet, items] of Object.entries(subscales)) {
+          results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
+        }
+        results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
+        const resultsDiv = document.getElementById('results');
+        const resultsContainer = document.getElementById('results-container');
+        resultsContainer.innerHTML = '';
+        for (const [facet, score] of Object.entries(results)) {
+          const p = document.createElement('p');
+          p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
+          resultsContainer.appendChild(p);
+        }
+        document.getElementById('survey-form').classList.add('hidden');
+        resultsDiv.classList.remove('hidden');
+      }
+    </script>
+  </body>
+
+</html>
