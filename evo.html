@@ -146,6 +146,10 @@
     </h3>
     <p>Please select the one number that comes closest to reflecting your opinion
     </p>
+    <p id="survey-instructions" class="sr-only">
+      Please select one number per question using a scale from 1 (Disagree very much) to 6 (Agree very much).
+    </p>
+    <div aria-live="polite" class="sr-only" id="screenreader-updates"></div>
     <div class="job-survey-container">
       <fieldset class="scale-legend-container">
         <legend style="border: 0; margin-bottom:0.6rem; font-size: 125%;">Survey Scale:
@@ -166,7 +170,7 @@
         </div>
       </fieldset>
       <hr style="width: 55%; margin-top: 10px; margin-bottom: 2.8rem; border: 1px solid #D33D3D;" />
-      <form id="survey-form">
+      <form id="survey-form" aria-describedby="survey-instructions">
         <div class="question" id="question-container"><!-- Question will be injected here --></div>
         <div class="button-group">
           <button class="survey-prev" id="prev-btn" aria-label="Go to previous survey page" type="button">Prev
@@ -244,6 +248,7 @@
       const responses = new Array(36).fill(null);
       // let currentQuestion = 0;
       const container = document.getElementById('question-container');
+      const screenReaderUpdates = document.getElementById('screenreader-updates');
       const nextBtn = document.getElementById('next-btn');
       const prevBtn = document.getElementById('prev-btn');
       const paginateCount = document.getElementById('survey-paginate');
@@ -271,7 +276,7 @@
       nextBtn.addEventListener('click', () => {
         const start = currentPage * questionsPerPage;
         const end = Math.min(start + questionsPerPage, questions.length);
-        // Save all current responses
+        // Alert if a radio button is not selected
         for (let i = start; i < end; i++) {
           const selected = container.querySelector(`input[name="q${i}"]:checked`);
           if (!selected) {
@@ -283,6 +288,7 @@
         if (currentPage < totalPages - 1) {
           currentPage++;
           renderQuestionPage(currentPage);
+          screenReaderUpdates.textContent = "Next page loaded.";
         } else {
           calculateScores();
         }
@@ -291,6 +297,7 @@
         if (currentPage > 0) {
           currentPage--;
           renderQuestionPage(currentPage);
+          screenReaderUpdates.textContent = "Previous page loaded.";
         }
       });
 
