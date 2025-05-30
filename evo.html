@@ -159,7 +159,7 @@
         <div class="button-group">
           <button class="survey-prev" id="prev-btn" type="button">Prev
           </button>
-          <p class="survey-pagination" id="survey-paginate">Page </p>
+          <p class="survey-pagination" id="survey-paginate"></p>
           <button class="survey-next" id="next-btn" type="button">Next
           </button>
         </div>
@@ -234,7 +234,7 @@
       const container = document.getElementById('question-container');
       const nextBtn = document.getElementById('next-btn');
       const prevBtn = document.getElementById('prev-btn');
-      const paginate = document.getElementById('survey-paginate');
+      const paginateCount = document.getElementById('survey-paginate');
 
       // To show 10 questions and add response to variables
       function renderQuestionPage(page) {
@@ -251,7 +251,8 @@
             </div>`;
           container.appendChild(questionDiv);
         }
-        console.log(currentPage);
+
+        paginateCount.textContent = `Page ${currentPage + 1} / ${totalPages}`;
         prevBtn.disabled = page === 0;
         nextBtn.textContent = page === totalPages - 1 ? 'Submit' : 'Next';
       }
