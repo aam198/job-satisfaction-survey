@@ -183,6 +183,8 @@
       <div class="hidden" id="results">
         <h4 style="text-align: center; margin-bottom:1.2rem; color:#4e4e4e; ">Survey Results
         </h4>
+        <p>Each category is scored out of a maximum of 24 points, with a Total Satisfaction Score out of 216.</p>
+        <p>A higher score indicates greater overall job satisfaction.</p>
         <div id="results-container">&#160;
         </div>
       </div>
@@ -306,25 +308,27 @@
       function calculateScores() {
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
-          if (resp === null) return null;
-          return negativeItems.includes(itemNumber) ? 7 - resp : resp;
+            if (resp === null) return null;
+            return negativeItems.includes(itemNumber) ? 7 - resp : resp;
         });
+
         const answered = scoredResponses.filter(x => x !== null);
         const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
         const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
         const results = {};
-        for (const [facet, items] of Object.entries(subscales)) {
-          results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
-        }
+          for (const [facet, items] of Object.entries(subscales)) {
+            results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
+          }
         results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
+        // Creating a div for results container
         const resultsDiv = document.getElementById('results');
         const resultsContainer = document.getElementById('results-container');
         resultsContainer.innerHTML = '';
-        for (const [facet, score] of Object.entries(results)) {
-          const p = document.createElement('p');
-          p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
-          resultsContainer.appendChild(p);
-        }
+          for (const [facet, score] of Object.entries(results)) {
+            const p = document.createElement('p');
+            p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
+            resultsContainer.appendChild(p);
+          }
         document.getElementById('survey-form').classList.add('hidden');
         resultsDiv.classList.remove('hidden');
       }
