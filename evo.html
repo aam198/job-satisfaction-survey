@@ -260,33 +260,46 @@
         container.innerHTML = '';
         const start = page * questionsPerPage;
         const end = Math.min(start + questionsPerPage, questions.length);
-        for (let i = start; i < end; i++) {
-          const savedResponse = responses[i];
-          const questionDiv = document.createElement('fieldset');
-          questionDiv.classList.add('question-block');
-          questionDiv.innerHTML = `
-            <legend class="question-text">${i + 1}. ${questions[i]}</legend>
-            <div class="question-scale" role="radiogroup">${[1, 2, 3, 4, 5, 6].map(num => `<label for="q${i + 1}"> <input id="q${i +1}" type="radio" name="q${i}" value="${num}" ${savedResponse === num ? 'checked' : ''} required> ${num} </label>`).join('')}
-            </div>`;
-          container.appendChild(questionDiv);
-        }
 
-        paginateCount.textContent = `Page ${currentPage + 1} / ${totalPages}`;
+        for (let i = start; i < end; i++) {
+        const savedResponse = responses[i];
+        const fieldset = document.createElement('fieldset');
+        fieldset.classList.add('question-block');
+
+        const options = [1, 2, 3, 4, 5, 6].map(value => {
+          const checked = savedResponse === value ? 'checked' : '';
+          return `<label>
+            <input type="radio" name="q${i}" value="${value}" ${checked} required> ${value}
+          </label>`;
+        }).join('');
+
+        fieldset.innerHTML = `
+          <legend class="question-text">${i + 1}. ${questionBank[i]}</legend>
+          <div class="question-scale" role="radiogroup">${options}</div>
+        `;
+        container.appendChild(fieldset);
+      }
+
+        paginateCount.textContent = `Page ${page + 1} / ${totalPages}`;
         prevBtn.disabled = page === 0;
         nextBtn.textContent = page === totalPages - 1 ? 'Submit' : 'Next';
       }
+
+      // Event Listeners
       nextBtn.addEventListener('click', () => {
         const start = currentPage * questionsPerPage;
         const end = Math.min(start + questionsPerPage, questions.length);
-        // Alert if a radio button is not selected
+
         for (let i = start; i < end; i++) {
           const selected = container.querySelector(`input[name="q${i}"]:checked`);
+          // Alert if a radio button is not selected
           if (!selected) {
             alert(`Please answer question ${i + 1} before continuing.`);
             return;
           }
           responses[i] = parseInt(selected.value);
         }
+
         if (currentPage < totalPages - 1) {
           currentPage++;
           renderQuestionPage(currentPage);
@@ -295,6 +308,7 @@
           calculateScores();
         }
       });
+      
       prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
           currentPage--;
