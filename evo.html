@@ -322,6 +322,7 @@
       function calculateScores() {
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
+          
           if (resp === null) return null;
           return negativeItems.includes(itemNumber) ? 7 - resp : resp;
         });
