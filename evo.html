@@ -308,7 +308,7 @@
           calculateScores();
         }
       });
-      
+
       prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
           currentPage--;
@@ -322,17 +322,18 @@
       function calculateScores() {
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
-            if (resp === null) return null;
-            return negativeItems.includes(itemNumber) ? 7 - resp : resp;
+          if (resp === null) return null;
+          return negativeItems.includes(itemNumber) ? 7 - resp : resp;
         });
 
-        const answered = scoredResponses.filter(x => x !== null);
-        const meanScore = answered.reduce((a, b) => a + b, 0) / answered.length;
-        const completedResponses = scoredResponses.map(x => x === null ? Math.round(meanScore) : x);
+        const meanScore = scoredResponses.reduce((sum, val) => sum + (val || 0), 0) / scoredResponses.filter(v => v !== null).length;
+
+        const completedResponses = scoredResponses.map(resp => resp === null ? Math.round(meanScore) : resp);
+
         const results = {};
-          for (const [facet, items] of Object.entries(subscales)) {
-            results[facet] = items.reduce((sum, itemNum) => sum + completedResponses[itemNum - 1], 0);
-          }
+        for (const [facet, itemNums] of Object.entries(subscales)) {
+          results[facet] = itemNums.reduce((sum, idx) => sum + completedResponses[idx - 1], 0);
+        }
         results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
         // Creating a div for results container
         const resultsDiv = document.getElementById('results');
