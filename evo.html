@@ -255,31 +255,30 @@
       const prevBtn = document.getElementById('prev-btn');
       const paginateCount = document.getElementById('survey-paginate');
 
-      // To show 10 questions and add response to variables
+      // To show 10 questions per page
       function renderQuestionPage(page) {
         container.innerHTML = '';
         const start = page * questionsPerPage;
         const end = Math.min(start + questionsPerPage, questions.length);
 
         for (let i = start; i < end; i++) {
-        const savedResponse = responses[i];
-        const fieldset = document.createElement('fieldset');
-        fieldset.classList.add('question-block');
+          const savedResponse = responses[i];
+          const fieldset = document.createElement('fieldset');
+          fieldset.classList.add('question-block');
 
-        const options = [1, 2, 3, 4, 5, 6].map(value => {
-          const checked = savedResponse === value ? 'checked' : '';
-          return `<label>
-            <input type="radio" name="q${i}" value="${value}" ${checked} required> ${value}
-          </label>`;
-        }).join('');
+          const options = [1, 2, 3, 4, 5, 6].map(value => {
+            const checked = savedResponse === value ? 'checked' : '';
+            return `<label>
+              <input type="radio" name="q${i}" value="${value}" ${checked} required> ${value}
+              </label>`;
+            }).join('');
 
-        fieldset.innerHTML = `
-          <legend class="question-text">${i + 1}. ${questionBank[i]}</legend>
-          <div class="question-scale" role="radiogroup">${options}</div>
-        `;
-        container.appendChild(fieldset);
-      }
-
+          fieldset.innerHTML = `
+            <legend class="question-text">${i + 1}. ${questionBank[i]}</legend>
+            <div class="question-scale" role="radiogroup">${options}</div>`;
+          container.appendChild(fieldset);
+        }
+        // Shows progress of current page out of total pages
         paginateCount.textContent = `Page ${page + 1} / ${totalPages}`;
         prevBtn.disabled = page === 0;
         nextBtn.textContent = page === totalPages - 1 ? 'Submit' : 'Next';
@@ -322,7 +321,7 @@
       function calculateScores() {
         const scoredResponses = responses.map((resp, index) => {
           const itemNumber = index + 1;
-          
+
           if (resp === null) return null;
           return negativeItems.includes(itemNumber) ? 7 - resp : resp;
         });
@@ -335,6 +334,7 @@
         for (const [facet, itemNums] of Object.entries(subscales)) {
           results[facet] = itemNums.reduce((sum, idx) => sum + completedResponses[idx - 1], 0);
         }
+
         results.TotalSatisfaction = completedResponses.reduce((a, b) => a + b, 0);
         // Creating a div for results container
         const resultsDiv = document.getElementById('results');
@@ -342,9 +342,17 @@
         resultsContainer.innerHTML = '';
           for (const [facet, score] of Object.entries(results)) {
             const p = document.createElement('p');
-            p.textContent = `${facet.replace(/([A-Z])/g, ' $1')}: ${score}`;
+            const label = facet.replace(/([A-Z])/g, ' $1');
+
+            if (facet === 'TotalSatisfaction') {
+              p.innerHTML = `<strong>${label}: ${score}</strong>`;
+            } else {
+              p.textContent = `${label}: ${score}`;
+            }
+
             resultsContainer.appendChild(p);
           }
+
         document.getElementById('survey-form').classList.add('hidden');
         resultsDiv.classList.remove('hidden');
       }
