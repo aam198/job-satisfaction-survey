@@ -345,9 +345,9 @@
             const label = facet.replace(/([A-Z])/g, ' $1');
 
             if (facet === 'TotalSatisfaction') {
-              p.innerHTML = `<strong>${label}: ${score}</strong>`;
+              p.innerHTML = `<strong>${label}:</strong> ${score}/216`;
             } else {
-              p.textContent = `${label}: ${score}`;
+              p.textContent = `${label}: ${score}/ 24`;
             }
 
             resultsContainer.appendChild(p);
